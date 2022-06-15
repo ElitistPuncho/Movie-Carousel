@@ -1,0 +1,276 @@
+/* Base */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #111111;
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
+
+h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+p {
+   font-size: .825rem;
+   font-weight: 300; 
+   line-height: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    text-decoration: none;
+}
+
+/* Style */
+
+.carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 100%);
+    position: relative;
+    max-width: 600px;
+    margin-inline: auto;
+    overflow: hidden;
+}
+
+.carousel-item {
+    position: relative;
+    height: 100%;
+    min-height: 425px;
+    color: #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.carousel-item,
+.carousel-item-hidden {
+    display: none;
+}
+
+.carousel-item-visible {
+    display: block;
+    animation: fadeVisibility 0.5s;
+} 
+
+.img1 {
+    background-image: url('images/1.jpg');
+}
+
+.img2 {
+    background-image: url('images/2.jpg');
+}
+
+.img3 {
+    background-image: url('images/3.jpg');
+}
+
+.info-container {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    height: 100%;
+}
+
+.text-content {
+    position: relative;
+    background-color: rgba(0,0,0,.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 2rem;
+    animation: infoSlide 800ms ease-out;
+}
+
+.text-content > * {
+    animation: fadeIn 700ms ease-in;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+.movie-info {
+    font-size: .75rem;
+    color: #f8f8f8;
+    font-weight: 200;
+}
+
+.score-board {
+    display: flex;
+    gap: 1.25rem; 
+}
+
+.score {
+    display: flex;
+    align-items: center;
+    height: 20px;
+}
+
+::before {
+    width: 16px;
+    transform: scale(.25);
+    margin-right: .5rem;
+    position: relative;
+    left: -9px;  
+}
+
+.rt-score::before  {
+    content: url('images/fresh_tomato.svg'); 
+}
+
+.rt-audience::before  {
+    content: url('images/AS_popcorn_red.svg');
+}
+
+.imdb-score::before {
+    display: grid;
+    content: url('https://api.iconify.design/bxl/imdb.svg?color=%23f5c518');
+    transform: scale(1.5);
+    left: 0;
+}
+
+.carousel-actions {
+    position: absolute;
+    bottom: 1rem;
+    left: 35%;
+    transform: translateX(-35%);
+}
+
+.carousel-actions button {
+    background-color: rgba(255,255,255,1);
+    border: 0;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    color: #010101;
+}
+
+button:focus {
+    outline: none;
+}
+
+.dot-nav {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    right: 1rem;
+    padding: 0;
+}
+
+.dots {
+    width: 5px;
+    height: 124px;
+    background-color: #000;
+    opacity: .7;
+    margin-bottom: .5rem;
+}
+
+.dots-active {
+    display: block;
+    background-color: #f5c518;
+    opacity: 1;
+}
+
+/* Media queries */
+
+@media (max-width: 580px) {
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+    .text-content {
+        backdrop-filter: blur(0);
+        -webkit-backdrop-filter: blur(0);
+        background-color: rgba(0,0,0,0);
+        background-image: linear-gradient(90deg, rgba(0,0,0,.95), rgba(0,0,0,0.4));
+    }
+    .carousel-actions {
+        left: 1rem;
+        transform: translateX(1rem);
+    }
+    .img1 {
+        background-position: 50%;
+    }
+    .imdb-score {
+        padding-bottom: 6rem;
+    }
+    .carousel-actions {
+        bottom: 3rem
+    }
+    .text-content {
+        animation: none;
+    }
+    .text-content > * {
+        animation: fadeIn 400ms ease-in;
+        animation-fill-mode: forwards;
+    }
+    .carousel-actions button {
+        width: calc(50vw - 2rem);
+        background-color: rgba(255,255,255,0.2);
+        backdrop-filter: blur(64px); /* Blur doesn't work on FireFox */
+        -webkit-backdrop-filter: blur(64px);
+        color: #fff;
+    }
+    .dot-nav {
+        flex-direction: row;
+        gap: .825rem;
+        right: 50%;
+        transform: translateX(50%);
+        top: 90%;
+    }
+    .dots {
+        width: 8px;
+        height: 8px;
+        border-radius: 50px;
+        background-color: #fff;
+    }
+    .dots-active {
+        background-color: #f5c518;
+}
+}
+
+/* Animations */
+
+/* slide transition effect */
+@keyframes fadeVisibility { 
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* text background animation - not active on mobile (see mediaqueries line 211)*/
+@keyframes infoSlide {
+    0% {
+        transform: translateX(-150%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* text animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-150%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
